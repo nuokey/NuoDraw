@@ -13,11 +13,14 @@ def mouse_moved(event):
 	if mouse:
 		mouse_y = root.winfo_pointery() - root.winfo_rooty()
 		mouse_x = root.winfo_pointerx() - root.winfo_rootx()
-		objects.append(Label(bg = 'red'))
-		objects[len(objects)-1].place(x = mouse_x - 10, y = mouse_y - 10, width = 20, height = 20)
+		c.create_oval(mouse_x - 10, mouse_y - 10, mouse_x + 10, mouse_y + 10, fill = 'black')
 
 root = Tk()
+root.geometry('750x750')
 root.config(cursor = 'plus')
+
+c = Canvas(root, width = 750, height = 750, bg = 'white')
+c.pack()
 
 mouse = False
 
