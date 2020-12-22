@@ -8,9 +8,13 @@ def mouse_done():
 		size = int(size_entry.get()) // 2
 		canv.append([c.create_oval(mouse_x - size, mouse_y - size, mouse_x + size, mouse_y + size, fill = color, width = 0), [mouse_x, mouse_y], size])
 	elif regym == 'lastic':
-		for i in canv:
-			if abs(i[1][0] - mouse_x) <= i[2] and abs(i[1][1] - mouse_y) <= i[2]:
-				c.delete(i[0])
+		i = 0
+		while i <= len(canv) - 1:
+			if abs(canv[i][1][0] - mouse_x) <= canv[i][2] and abs(canv[i][1][1] - mouse_y) <= canv[i][2]:
+				c.delete(canv[i][0])
+				del canv[i]
+				i += 1
+			i += 1
 
 def mouse_pressed(event):
 	global mouse, color
