@@ -25,6 +25,8 @@ def mouse_pressed(event):
 	size = int(size_entry.get()) // 2
 	if regym == 'square':
 		square_first_dot = (mouse_x, mouse_y)
+	elif regym == 'round':
+		square_first_dot = (mouse_x, mouse_y)
 
 def mouse_released(event):
 	global mouse, color, regym, square_first_dot
@@ -35,6 +37,8 @@ def mouse_released(event):
 	size = int(size_entry.get()) // 2
 	if regym == 'square':
 		c.create_rectangle(square_first_dot[0], square_first_dot[1], mouse_x, mouse_y, fill = color, width = 0)
+	elif regym == 'round':
+		c.create_oval(square_first_dot[0], square_first_dot[1], mouse_x, mouse_y, fill = color, width = 0)
 
 def mouse_moved(event):
 	global mouse
@@ -74,6 +78,10 @@ def change_lastic():
 def change_square():
 	global regym
 	regym = 'square'
+
+def change_round():
+	global regym
+	regym = 'round'
 
 root = Tk()
 root.geometry('750x750')
@@ -117,5 +125,8 @@ lastic_button.place(x = 5, y = 80, width = 30, height = 30)
 
 square_button = Button(root, text = 'S', bg = 'black', fg = 'white', command = change_square)
 square_button.place(x = 5, y = 115, width = 30, height = 30)
+
+round_button = Button(root, text = 'R', bg = 'black', fg = 'white', command = change_round)
+round_button.place(x = 5, y = 150, width = 30, height = 30)
 
 root.mainloop()
