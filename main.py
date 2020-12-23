@@ -17,13 +17,24 @@ def mouse_done():
 			i += 1
 
 def mouse_pressed(event):
-	global mouse, color
+	global mouse, color, regym, square_first_dot
 	mouse = True
 	mouse_done()
+	mouse_y = root.winfo_pointery() - root.winfo_rooty()
+	mouse_x = root.winfo_pointerx() - root.winfo_rootx()
+	size = int(size_entry.get()) // 2
+	if regym == 'square':
+		square_first_dot = (mouse_x, mouse_y)
 
 def mouse_released(event):
-	global mouse
+	global mouse, color, regym, square_first_dot
 	mouse = False
+	mouse_done()
+	mouse_y = root.winfo_pointery() - root.winfo_rooty()
+	mouse_x = root.winfo_pointerx() - root.winfo_rootx()
+	size = int(size_entry.get()) // 2
+	if regym == 'square':
+		c.create_rectangle(square_first_dot[0], square_first_dot[1], mouse_x, mouse_y, fill = color, width = 0)
 
 def mouse_moved(event):
 	global mouse
@@ -60,6 +71,10 @@ def change_lastic():
 	global regym
 	regym = 'lastic'
 
+def change_square():
+	global regym
+	regym = 'square'
+
 root = Tk()
 root.geometry('750x750')
 root.config(cursor = 'plus')
@@ -73,6 +88,7 @@ mouse = False
 colors = ['black', 'white', 'red', 'green', 'blue']
 color = colors[0]
 regym = 'draw'
+square_first_dot = (0, 0)
 
 objects = []
 root.bind('<ButtonPress-1>', mouse_pressed)
@@ -98,5 +114,8 @@ draw_button.place(x = 5, y = 45, width = 30, height = 30)
 
 lastic_button = Button(root, text = 'L', bg = 'black', fg = 'white', command = change_lastic)
 lastic_button.place(x = 5, y = 80, width = 30, height = 30)
+
+square_button = Button(root, text = 'S', bg = 'black', fg = 'white', command = change_square)
+square_button.place(x = 5, y = 115, width = 30, height = 30)
 
 root.mainloop()
