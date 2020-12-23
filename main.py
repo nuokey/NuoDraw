@@ -4,13 +4,13 @@ def mouse_done():
 	global color, regym, canv
 	mouse_y = root.winfo_pointery() - root.winfo_rooty()
 	mouse_x = root.winfo_pointerx() - root.winfo_rootx()
+	size = int(size_entry.get()) // 2
 	if regym == 'draw':
-		size = int(size_entry.get()) // 2
 		canv.append([c.create_oval(mouse_x - size, mouse_y - size, mouse_x + size, mouse_y + size, fill = color, width = 0), [mouse_x, mouse_y], size])
 	elif regym == 'lastic':
 		i = 0
 		while i <= len(canv) - 1:
-			if abs(canv[i][1][0] - mouse_x) <= canv[i][2] and abs(canv[i][1][1] - mouse_y) <= canv[i][2]:
+			if abs(canv[i][1][0] - mouse_x) <= canv[i][2] + size and abs(canv[i][1][1] - mouse_y) <= canv[i][2] + size:
 				c.delete(canv[i][0])
 				del canv[i]
 				i += 1
